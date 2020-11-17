@@ -127,7 +127,7 @@
     // Keydown doesn't repeat on Firefox and Opera on Mac.
     // Using kepress for Opera and Firefox and keydown for the rest seems to
     // work with up/down/enter/esc.
-    var event = ($.browser.opera || $.browser.mozilla) ? 'keypress' : 'keydown';
+    var event = 'keydown';
     $(elm)[event](function(e) {
       var $selected;
       keyDown = true;
@@ -222,10 +222,7 @@
     elm.value = $(sel).text();
     // Trigger element's change events.
     $(elm).change();
-    // Keep focus for all but IE (which doesn't like it)
-    if (!$.browser.msie) {
-      elm.focus();
-    }
+    elm.focus();
     // Hide picker
     $tpDiv.hide();
   }
