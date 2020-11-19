@@ -123,10 +123,6 @@
         $tpDiv.hide();
       }
     });
-    // Keypress doesn't repeat on Safari for non-text keys.
-    // Keydown doesn't repeat on Firefox and Opera on Mac.
-    // Using kepress for Opera and Firefox and keydown for the rest seems to
-    // work with up/down/enter/esc.
     var event = 'keydown';
     $(elm)[event](function(e) {
       var $selected;
