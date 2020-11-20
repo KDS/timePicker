@@ -88,7 +88,7 @@
         $(this).addClass(selectedClass);
       }
     }).mousedown(function() {
-       tpOver = true;
+      tpOver = true;
     }).click(function() {
       setTimeVal(elm, this, $tpDiv, settings);
       tpOver = false;
@@ -143,11 +143,7 @@
         $tpDiv.hide();
       }
     });
-    // Keypress doesn't repeat on Safari for non-text keys.
-    // Keydown doesn't repeat on Firefox and Opera on Mac.
-    // Using kepress for Opera and Firefox and keydown for the rest seems to
-    // work with up/down/enter/esc.
-    var event = ($.browser.opera || $.browser.mozilla) ? 'keypress' : 'keydown';
+    var event = 'keydown';
     $(elm)[event](function(e) {
       var $selected;
       keyDown = true;
@@ -244,17 +240,14 @@
     elm.value = $(sel).text();
     // Trigger element's change events.
     $(elm).change();
-    // Keep focus for all but IE (which doesn't like it)
-    if (!$.browser.msie) {
-      elm.focus();
-    }
+    elm.focus();
     // Hide picker
     $tpDiv.hide();
   }
 
   function formatTime(date, settings) {
     if (date) return parseFormat(settings, date);
-  };
+  }
 
   function formatNumber(value) {
     return (value < 10 ? '0' : '') + value;
@@ -279,29 +272,29 @@
     for (var i=0; i < formatParts.length; i++) {
       if (stringParts && stringParts[i+1]) {
         switch (formatParts[i]) {
-        case "hh":
-        case "h":
-          hours = parseInt(stringParts[i+1], 10);
-          break;
-        case "HH":
-        case "H":
-          hours   = parseInt(stringParts[i+1], 10);
-          break;
-        case "mm":
-        case "m":
-          minutes = parseInt(stringParts[i+1], 10);
-          break;
-        case "ss":
-        case "s":
-          seconds = parseInt(stringParts[i+1], 10);
-          break;
-        case "t":
-          am = am.substring(0, 1);
-          pm = pm.substring(0, 1);
+          case "hh":
+          case "h":
+            hours = parseInt(stringParts[i+1], 10);
+            break;
+          case "HH":
+          case "H":
+            hours   = parseInt(stringParts[i+1], 10);
+            break;
+          case "mm":
+          case "m":
+            minutes = parseInt(stringParts[i+1], 10);
+            break;
+          case "ss":
+          case "s":
+            seconds = parseInt(stringParts[i+1], 10);
+            break;
+          case "t":
+            am = am.substring(0, 1);
+            pm = pm.substring(0, 1);
           // break intentionally left out.
-        case "tt":
-          ampm = stringParts[i+1];
-          break;
+          case "tt":
+            ampm = stringParts[i+1];
+            break;
         }
       };
     };
@@ -316,7 +309,7 @@
     if (date.getHours() != hours || date.getMinutes() != minutes || date.getSeconds() != seconds)
       throw 'Invalid time';
     return date;
- }
+  }
 
   /* Normalise date object to a common year, month and day. */
   function normalizeTime(date) {
@@ -328,7 +321,7 @@
 
   function parseFormat(settings, date) {
     var p = function p(s) {
-         return (s < 10) ? "0" + s : s;
+      return (s < 10) ? "0" + s : s;
     };
     return settings.timeFormat.replace(/hh?|HH?|mm?|ss?|tt?/g, function(format) {
       var am = settings.amDesignator;
